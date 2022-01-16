@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g-j1f5*li2kktr)b*7g9%yjuzv@b9sw)$f@u@g#)^_ymygbpny'
+SECRET_KEY = 'django-insecure-$f+n15amfb40kwy*2hfzz)-_u@5_3(qqiz2hd0@tdz0u8^kzf='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_extensions',
+    'rest_framework',
 
     # MyApps
-    'apps.books'
+    'books',
+    'shelves',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-
 from django.utils.translation import gettext_lazy as _
 
 LANGUAGE_CODE = 'en'
@@ -115,7 +117,11 @@ LANGUAGES = [
     ('fa', _('Farsi')),
 ]
 
-TIME_ZONE = 'Iran/Tehran'
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'),
+)
+
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -130,3 +136,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'user.AccountModel'
